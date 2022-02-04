@@ -1,221 +1,272 @@
 #include <iostream>
-#include <cstring>
 
 using namespace std;
 
 
-char st[2000];
+  struct ListNode
+    {
+      int val;
+      ListNode *next;
+      ListNode() : val(0), next(nullptr) {}
+      ListNode(int x) : val(x), next(nullptr) {}
+      ListNode(int x, ListNode *next) : val(x), next(next) {}
+    };
 
-int fact(int a);
-char * exchange(char * str, int needle_len, char * ch_1);
+  class Solution
+  {
+  public:
+      ListNode* addTwoNumbers(ListNode* l1, ListNode* l2)
+      {
+          int perebor=0;
+          while(l1->val!=0 && l2->val!=0)
+          {
+              if ((l1->val+l2->val+perebor)>9)
+              {
+                  l1->val=(l1->val+l2->val-10+perebor);
+                  perebor=1;
+              }
+              else
+              {
+                  l1->val=(l1->val+l2->val+perebor);
+                  perebor=0;
+              }
+              l1++;
+              l2++;
+          }
+          return l1;
+      }
+  };
+
+  ListNode* addTwoNumbers(ListNode* l1, ListNode* l2)
+  {
+      int perebor=0;
+      int count=1;
+      int count_1=1;
+      int count_2=1;
+      ListNode *lp1,*lp2;
+      lp1=l1;
+      lp2=l2;
+      ListNode *lpp1,*lpp2;
+      lpp1=l1;
+      lpp2=l2;
+      ListNode *lppp1,*lppp2;
+      lppp1=l1;
+      lppp2=l2;
+      ListNode lsn(1);
+      (&lsn)->next=nullptr;
+
+      while (lp1->next != nullptr)
+      {
+          count_1++;
+          lp1=lp1->next;
+      }
+      while (lp2->next != nullptr)
+      {
+          count_2++;
+          lp2=lp2->next;
+      }
+      if (count_1>=count_2)
+      {
+          while(l1->next != nullptr)
+          {
+
+              if (count>count_2)
+              {
+                  if ((l1->val+perebor)>9)
+                  {
+                      l1->val=(l1->val-10+perebor);
+                      perebor=1;
+                  }
+                  else
+                  {
+                      l1->val=(l1->val+perebor);
+                      perebor=0;
+                  }
+                  count++;
+                  l1=l1->next;
+              }
+              else
+              {
+                  if ((l1->val+l2->val+perebor)>9)
+                  {
+                      l1->val=(l1->val+l2->val-10+perebor);
+                      perebor=1;
+                  }
+                  else
+                  {
+                      l1->val=(l1->val+l2->val+perebor);
+                      perebor=0;
+                  }
+                  l1=l1->next;
+                  l2=l2->next;
+                  count++;
+              }
+          }
+
+          if (count>count_2)
+          {
+              if ((l1->val+perebor)>9)
+              {
+                  l1->val=(l1->val-10+perebor);
+                  perebor=1;
+              }
+              else
+              {
+                  l1->val=(l1->val+perebor);
+                  perebor=0;
+              }
+              count++;
+              if (perebor==1)
+              {
+                  lppp2->val=1;
+                  lppp2->next=nullptr;
+                  l1->next = lppp2;
+              }
+          }
+          else
+          {
+              if ((l1->val+l2->val+perebor)>9)
+              {
+                  l1->val=(l1->val+l2->val-10+perebor);
+                  perebor=1;
+              }
+              else
+              {
+                  l1->val=(l1->val+l2->val+perebor);
+                  perebor=0;
+              }
+              count++;
+              if (perebor==1)
+              {
+                  lppp2->val=1;
+                  lppp2->next=nullptr;
+                  l1->next = lppp2;
+              }
+          }
+
+          return lpp1;
+      }
+      else
+      {
+          while(l2->next != nullptr)
+          {
+
+              if (count>count_1)
+              {
+                  if ((l2->val+perebor)>9)
+                  {
+                      l2->val=(l2->val-10+perebor);
+                      perebor=1;
+                  }
+                  else
+                  {
+                      l2->val=(l2->val+perebor);
+                      perebor=0;
+                  }
+                  count++;
+                  l2=l2->next;;
+              }
+              else
+              {
+                  if ((l1->val+l2->val+perebor)>9)
+                  {
+                      l2->val=(l1->val+l2->val-10+perebor);
+                      perebor=1;
+                  }
+                  else
+                  {
+                      l2->val=(l1->val+l2->val+perebor);
+                      perebor=0;
+                  }
+                  l1=l1->next;;
+                  l2=l2->next;;
+                  count++;
+              }
+          }
+
+          if (count>count_1)
+          {
+              if ((l2->val+perebor)>9)
+              {
+                  l2->val=(l2->val-10+perebor);
+                  perebor=1;
+              }
+              else
+              {
+                  l2->val=(l2->val+perebor);
+                  perebor=0;
+              }
+              count++;
+              if (perebor==1)
+              {
+                  lppp1->val=1;
+                  lppp1->next=nullptr;
+                  l2->next = lppp1;
+              }
+          }
+          else
+          {
+              if ((l1->val+l2->val+perebor)>9)
+              {
+                  l2->val=(l1->val+l2->val-10+perebor);
+                  perebor=1;
+              }
+              else
+              {
+                  l2->val=(l1->val+l2->val+perebor);
+                  perebor=0;
+              }
+              if (perebor==1)
+              {
+                  lppp1->val=1;
+                  lppp1->next=nullptr;
+                  l2->next = lppp1;
+              }
+              count++;
+          }
+
+          return lpp2;
+      }
+
+
+  }
 
 int main()
 {
+    ListNode *ptr;
+    ListNode l1_7(9);
+    ListNode l1_6(9);
+    ListNode l1_5(9);
+    ListNode l1_4(9);
+    ListNode l1_3(9);
+    ListNode l1_2(9);
+    ListNode l1_1(9);
+    l1_1.next = & l1_2;
+    l1_2.next = & l1_3;
+    l1_3.next = & l1_4;
+    l1_4.next = & l1_5;
+    l1_5.next = & l1_6;
+    l1_6.next = & l1_7;
+    l1_7.next = nullptr;
 
-    int needle_len, haystack_len;
-    char str_needl[2000];
-    char str_haystack[2000];
+    ListNode *pte;
+    ListNode l2_4(9);
+    ListNode l2_3(9);
+    ListNode l2_2(9);
+    ListNode l2_1(9);
+    l2_1.next = & l2_2;
+    l2_2.next = & l2_3;
+    l2_3.next = & l2_4;
+    l2_4.next = nullptr;
 
-    int schet_matr=0;
-
-
-    cout<<"Insert needle string:"<<endl;
-    cin.getline(str_needl,2000);
-    cout<<endl;
-    cout<<"Insert haystack string:"<<endl;
-    cin.getline(str_haystack,2000);
-    cout<<endl;
-
-    needle_len=strlen(str_needl);
-    haystack_len=strlen(str_haystack);
-
-
-    char matr[fact(needle_len)][needle_len];
-
-
-    for (int i=0; i<needle_len; i++)
+    ListNode * l3;
+    l3=addTwoNumbers(&l1_1,&l2_1);
+    for (int i=0; i<8; i++)
     {
-        matr[0][i]=str_needl[i];
-
+        cout<<l3->val<<"  ";
+        l3=l3->next;
     }
-
-    schet_matr++;
-    int schet_1=0;
-    int schet_2=0;
-
-
-    for (int k=(needle_len-2); k>=0; k--)  // цикл пробегает указателем от к-2 до 0
-    {
-        schet_1=0;
-        for (int j=0; j<schet_matr; j++)
-        {
-            for (int q=k; q<(needle_len-1); q++)
-            {
-                char exam[2000];
-                if (schet_2==0)
-                {
-                    for (int i=0; i<needle_len; i++) // записываем в новую строку текущий указатель на matr
-                    {
-                        exam[i]=matr[j][i];
-                    }
-                }
-                else
-                {
-                    for (int i=0; i<needle_len; i++) // записываем в новую строку текущий указатель на matr
-                    {
-                        exam[i]=matr[schet_matr+schet_1-1][i];
-                    }
-                }
-
-                exchange(exam,needle_len,&exam[q]);
-                for (int i=0; i<needle_len; i++) // записываем в новую строку текущий указатель на matr
-                {
-                    matr[schet_matr+schet_1][i]=st[i];
-                }
-
-                schet_1++;
-                schet_2++;
-            }
-
-            schet_2=0;
-        }
-        schet_matr=schet_matr+schet_1;
-    }
-
-
-    //////////
-
-    for (int i=0; i<schet_matr;i++)
-    {
-        for (int j=0;j<needle_len;j++)  // вывод всех строк matr
-        {
-            cout<<matr[i][j];
-        }
-        cout<<endl;
-    }
-
-    //////////
-    int u=0;
-
-    for (int i=0; i<(fact(needle_len)-1); i++)
-    {
-        for (int j=i+1; j<fact(needle_len); j++)
-        {
-            char ty_1[needle_len],ty_2[needle_len];
-            for (int k=0; k<needle_len; k++)
-            {
-                ty_1[k]=matr[i][k];
-                ty_2[k]=matr[j][k];
-            }
-            if (strcmp( ty_1, ty_2)==0)
-            {
-                u++;
-            }
-        }
-    }
-    cout<<endl;
-    cout<<"Amount of equal strings from the matrix of all combinations of needle_string: "<<u<<endl<<endl<<endl;
-
-    for (int i=0; i<(fact(needle_len)-1); i++)
-    {
-        for (int j=i+1; j<fact(needle_len); j++)
-        {
-            char ty_1[needle_len],ty_2[needle_len];
-            for (int k=0; k<needle_len; k++)
-            {
-                ty_1[k]=matr[i][k];
-                ty_2[k]=matr[j][k];
-            }
-            if (strcmp( ty_1, ty_2)==0)
-            {
-                for (int l=0; l<needle_len; l++)
-                {
-                    matr[j][l]='0';
-                }
-            }
-        }
-    }
-
-    cout<<"All posible combinations of needle_string without repetition: "<<endl<<endl;
-    for (int i=0; i<fact(needle_len); i++)
-    {
-        if (matr[i][0]!='0')
-        {
-            for (int j=0;j<needle_len;j++)
-            {
-                cout<<matr[i][j];
-            }
-            cout<<endl;
-        }
-    }
-    cout<<endl;
-
-    int answer=0;
-
-    for (int i=0; i<fact(needle_len); i++)
-    {
-        if (matr[i][0]!='0')
-        {
-            char fg[needle_len];
-            for (int j=0; j<needle_len;j ++)
-            {
-                fg[j]=matr[i][j];
-            }
-
-            for (int d=0; d<(haystack_len-needle_len+1); d++)
-            {
-                char gf[needle_len];
-                for (int o=0; o<needle_len; o++)
-                {
-                    gf[o]=str_haystack[o+d];
-                }
-                if (strcmp(fg,gf)==0)
-                {
-                    answer++;
-                    break;
-                }
-            }
-        }
-    }
-
-    cout<<"Answer is: "<<answer<<endl;
-
+    l3=l3->next;
+    cout<<l3->val<<"  ";
     return 0;
-}
-
-char * exchange(char * str, int needle_len, char * ch_1)
-{
-    int i=0;
-    while (str != ch_1)
-    {
-        st[i] = * str;
-        str++;
-        i++;
-    }
-
-    char dirka = * str;
-    str++;
-    st[i] = * str;
-    i++;
-    st[i]=dirka;
-    i++;
-    str++;
-    while (*str!='0')
-    {
-        st[i] = * str;
-        str++;
-        i++;
-    }
-
-    return st;
-}
-
-
-int fact(int a)
-{
-    if (a==0) return 1;
-    else
-    {
-        return a*fact(a-1);
-    }
 }
